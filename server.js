@@ -1,22 +1,13 @@
-const express = require("express");
-const res = require("express/lib/response")
+const express = require('express');
 const app = express();
+const port = 3000;
 
-const addTwoNumber = (n1,n2)=>{
-    return n1 + n2
+app.use(express.static('public'));
 
-}
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html');
+});
 
-app.get("/addTwoNumber", (req, res)=>{
-    const n1 = parseInt(req.query.n1);
-    const n2 = parseInt(req.query.n2)
-    const result = addTwoNumber(n1,n2);
-    res.json({statuscode:200 , data: results});
-
-})
-
-console.log( addTwoNumber(19,12));
-const port = 3040;
-app.listen(port, ()=>{
-    console.log(`hello im listening on port  ${port}`)
-})
+app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+});
